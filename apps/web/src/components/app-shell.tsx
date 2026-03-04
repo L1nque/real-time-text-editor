@@ -151,10 +151,10 @@ function AppSidebar() {
             {docs.map((item) => (
               <SidebarMenuItem key={item.id}>
                 <SidebarMenuButton asChild>
-                  <a href={`/docs/${item.id}`}>
+                  <Link to="/docs/$slug" params={{ slug: item.id }}>
                     <FileIcon />
                     <span>{item.title}</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>

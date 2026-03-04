@@ -3,7 +3,7 @@ import "@blocknote/core/fonts/inter.css";
 import { useCreateBlockNote } from "@blocknote/react";
 import { BlockNoteView } from "@blocknote/shadcn";
 import "@blocknote/shadcn/style.css";
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useUser } from '@/hooks/use-user';
 import * as Y from "yjs";
 import YPartyKitProvider from "y-partykit/provider";
@@ -32,20 +32,65 @@ const getRandomColor = () => {
 };
 
 function RouteComponent() {
+  const { slug } = Route.useParams();
   const docData = Route.useLoaderData();
   const { name } = useUser();
-  const color = useMemo(() => getRandomColor(), []);
+  const color = useState(() => getRandomColor())[0];
 
-  const { doc, provider } = useMemo(() => {
+  const [collab, setCollab] = useState<{
+    doc: Y.Doc;
+    provider: YPartyKitProvider;
+    room: string;
+  } | null>(null);
+
+  useEffect(() => {
+    console.log(`[Collab] Connecting to room: ${slug}`);
     const doc = new Y.Doc();
     const provider = new YPartyKitProvider(
       "localhost:1999",
-      docData.id,
+      slug,
       doc,
     );
-    return { doc, provider };
-  }, [docData.id]);
 
+    setCollab({ doc, provider, room: slug });
+
+    return () => {
+      console.log(`[Collab] Cleaning up room: ${slug}`);
+      provider.destroy();
+      doc.destroy();
+      setCollab(null);
+    };
+  }, [slug]);
+
+  if (!collab || collab.room !== slug) {
+    return null; // Ensure we don't render the old room's data while transitioning
+  }
+
+  return (
+    <Editor
+      key={slug}
+      doc={collab.doc}
+      provider={collab.provider}
+      name={name}
+      color={color}
+      title={docData.title}
+    />
+  );
+}
+
+function Editor({
+  doc,
+  provider,
+  name,
+  color,
+  title,
+}: {
+  doc: Y.Doc;
+  provider: YPartyKitProvider;
+  name: string;
+  color: string;
+  title: string;
+}) {
   const editor = useCreateBlockNote({
     collaboration: {
       provider,
@@ -60,7 +105,7 @@ function RouteComponent() {
   return (
     <div className='p-20 w-full h-screen relative'>
       <div className="absolute top-4 left-20 z-10">
-        <h1 className="text-2xl font-bold text-gray-800">{docData.title}</h1>
+        <h1 className="text-2xl font-bold text-gray-800">{title}</h1>
       </div>
       <BlockNoteView
         className='h-full'
@@ -68,5 +113,5 @@ function RouteComponent() {
         theme="light"
       />
     </div>
-  )
+  );
 }
