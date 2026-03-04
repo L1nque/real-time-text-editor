@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import { useUser } from '@/hooks/use-user';
 import * as Y from "yjs";
 import YPartyKitProvider from "y-partykit/provider";
+import { IndexeddbPersistence } from 'y-indexeddb';
 
 interface DocData {
   id: string;
@@ -44,19 +45,19 @@ function RouteComponent() {
   } | null>(null);
 
   useEffect(() => {
-    console.log(`[Collab] Connecting to room: ${slug}`);
     const doc = new Y.Doc();
     const provider = new YPartyKitProvider(
       "localhost:1999",
       slug,
       doc,
     );
+    const persistence = new IndexeddbPersistence(slug, doc);
 
     setCollab({ doc, provider, room: slug });
 
     return () => {
-      console.log(`[Collab] Cleaning up room: ${slug}`);
       provider.destroy();
+      persistence.destroy();
       doc.destroy();
       setCollab(null);
     };

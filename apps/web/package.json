@@ -32,6 +32,7 @@
 		"tailwindcss": "^4.2.1",
 		"unique-names-generator": "^4.7.1",
 		"uuid": "^13.0.0",
+		"y-indexeddb": "^9.0.12",
 		"y-partykit": "^0.0.33",
 		"yjs": "^13.6.29",
 		"zod": "^4.3.6"
