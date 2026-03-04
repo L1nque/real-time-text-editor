@@ -1,0 +1,38 @@
+# Node
+node_modules
+.pnp.*
+*.log
+dist
+build
+.cache
+.next
+.nuxt
+.out
+.partykit
+*.local
+.DS_Store
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Env files
+.env
+.env.*.local
+!.env.example
+.dev.vars*
+!.dev.vars.example
+
+# Misc
+.yarn/*
+.yarn-integrity
+.rpt2_cache/
+.rts2_cache_*
+.nyc_output
+.coverage

@@ -1,0 +1,17 @@
+{
+  "name": "real-time-text-editor",
+  "version": "0.0.1",
+  "description": "A real-time collaborative text-editor",
+  "main": "index.js",
+  "keywords": [
+    "text-editor",
+    "real-time",
+    "collaboration",
+    "cloudflare",
+    "blockjs",
+    "partykit"
+  ],
+  "author": "Andrew D. (l1nque)",
+  "license": "MIT",
+  "packageManager": "pnpm@10.30.3"
+}
