@@ -31,7 +31,10 @@
 		"tailwind-merge": "^3.5.0",
 		"tailwindcss": "^4.2.1",
 		"unique-names-generator": "^4.7.1",
-		"uuid": "^13.0.0"
+		"uuid": "^13.0.0",
+		"y-partykit": "^0.0.33",
+		"yjs": "^13.6.29",
+		"zod": "^4.3.6"
 	},
 	"devDependencies": {
 		"@cloudflare/vite-plugin": "^1.26.0",

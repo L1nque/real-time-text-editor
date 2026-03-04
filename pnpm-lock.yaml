@@ -83,6 +83,15 @@ importers:
       uuid:
         specifier: ^13.0.0
         version: 13.0.0
+      y-partykit:
+        specifier: ^0.0.33
+        version: 0.0.33(react@19.2.4)(y-protocols@1.0.7(yjs@13.6.29))(yjs@13.6.29)
+      yjs:
+        specifier: ^13.6.29
+        version: 13.6.29
+      zod:
+        specifier: ^4.3.6
+        version: 4.3.6
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: ^1.26.0
@@ -3669,6 +3678,9 @@ packages:
     resolution: {integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==}
     engines: {node: '>=10'}
 
+  lodash.debounce@4.0.8:
+    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
+
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
 
@@ -4904,6 +4916,16 @@ packages:
   wsl-utils@0.3.1:
     resolution: {integrity: sha512-g/eziiSUNBSsdDJtCLB8bdYEUMj4jR7AGeUo96p/3dTafgjHhpF4RiCFPiRILwjQoDXx5MqkBr4fwWtR3Ky4Wg==}
     engines: {node: '>=20'}
+
+  y-partykit@0.0.33:
+    resolution: {integrity: sha512-TqM2H/C1fBZbFjL9kpBLC3EWWaizBUYdFzW5DMGmcZYfQv5tYYIBTqUW4eCZOXHkhNLTEA+s2ydSKGYi8u1+sg==}
+    peerDependencies:
+      react: '*'
+      y-protocols: ^1.0.6
+      yjs: ^13.6.16
+    peerDependenciesMeta:
+      react:
+        optional: true
 
   y-prosemirror@1.3.7:
     resolution: {integrity: sha512-NpM99WSdD4Fx4if5xOMDpPtU3oAmTSjlzh5U4353ABbRHl1HtAFUx6HlebLZfyFxXN9jzKMDkVbcRjqOZVkYQg==}
@@ -8451,6 +8473,8 @@ snapshots:
     dependencies:
       p-locate: 5.0.0
 
+  lodash.debounce@4.0.8: {}
+
   lodash.merge@4.6.2: {}
 
   log-symbols@6.0.0:
@@ -10004,6 +10028,15 @@ snapshots:
     dependencies:
       is-wsl: 3.1.1
       powershell-utils: 0.1.0
+
+  y-partykit@0.0.33(react@19.2.4)(y-protocols@1.0.7(yjs@13.6.29))(yjs@13.6.29):
+    dependencies:
+      lib0: 0.2.117
+      lodash.debounce: 4.0.8
+      y-protocols: 1.0.7(yjs@13.6.29)
+      yjs: 13.6.29
+    optionalDependencies:
+      react: 19.2.4
 
   y-prosemirror@1.3.7(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.6)(y-protocols@1.0.7(yjs@13.6.29))(yjs@13.6.29):
     dependencies:
