@@ -21,8 +21,6 @@ function HomeComponent() {
           This is a demonstration of a <strong>real-time collaborative notion-like text editor</strong>.
           In theory, by utilizing durable objects to host a room per document, this should be able to handle massive scale.
           However, since I'm using my personal api keys, please go easy on the usage.
-          {/* Built with performance and scalability in mind, it allows multiple users to edit */}
-          {/* documents simultaneously with zero latency friction. */}
         </p>
       </section>
 

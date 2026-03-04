@@ -11,6 +11,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { useEffect, useState } from "react";
+import { Link, useRouter } from "@tanstack/react-router";
 
 export default function AppShell({ children }: { children?: React.ReactNode; }) {
   return (
@@ -51,22 +53,10 @@ export default function AppShell({ children }: { children?: React.ReactNode; }) 
   )
 }
 
-const projects = [
-  {
-    name: "Design Engineering",
-    url: "#",
-  },
-  {
-    name: "Sales & Marketing",
-    url: "#",
-  },
-  {
-    name: "Travel",
-    url: "#",
-  },
-]
 
 function AppSidebar() {
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const router = useRouter();
   const user = useUser();
   const name = uniqueNamesGenerator({
     dictionaries: [adjectives, animals, colors],
@@ -74,6 +64,27 @@ function AppSidebar() {
     separator: '-',
     style: 'capital',
   });
+
+  const [projectName, setProjectName] = useState('');
+  const [docs, setDocs] = useState<{ id: string; title: string; createdBy: string; created: number; }[]>([]);
+
+  useEffect(() => {
+    fetch("/api/docs").then((res) => res.json()).then((data) => setDocs(data.results));
+  }, []);
+
+  async function handleCreateDoc() {
+    try {
+      const res = await fetch('/api/docs', {
+        body: JSON.stringify({ title: projectName != '' ? projectName : name, createdBy: user.name }),
+        method: 'POST',
+      }).then(async res => await res.json());
+
+      setIsCreateDialogOpen(false);
+      router.navigate({ to: '/docs/$slug', params: { slug: res.id } })
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   return (
     <Sidebar>
@@ -96,14 +107,14 @@ function AppSidebar() {
           </SidebarGroupLabel>
           <SidebarMenuItem>
             <SidebarMenuButton tooltip={'home'} asChild>
-              <a>
+              <Link to={'/'}>
                 <HomeIcon />
                 Home
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <Dialog>
+            <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
               <DialogTrigger asChild>
                 <SidebarMenuButton tooltip={"create"}>
                   <PlusIcon />
@@ -119,14 +130,14 @@ function AppSidebar() {
                     Please go easy on me.
                   </DialogDescription>
                 </DialogHeader>
-                <Input placeholder={name} />
+                <Input placeholder={name} value={projectName} onChange={(v) => setProjectName(v.target.value)} />
                 <DialogFooter>
                   <DialogClose asChild>
                     <Button variant={'secondary'}>
                       Cancel
                     </Button>
                   </DialogClose>
-                  <Button>
+                  <Button onClick={handleCreateDoc}>
                     Create
                   </Button>
                 </DialogFooter>
@@ -137,12 +148,12 @@ function AppSidebar() {
         <SidebarGroup className="group-data-[collapsible=icon]:hidden">
           <SidebarGroupLabel>Documents</SidebarGroupLabel>
           <SidebarMenu>
-            {projects.map((item) => (
-              <SidebarMenuItem key={item.name}>
+            {docs.map((item) => (
+              <SidebarMenuItem key={item.id}>
                 <SidebarMenuButton asChild>
-                  <a href={item.url}>
+                  <a href={`/docs/${item.id}`}>
                     <FileIcon />
-                    <span>{item.name}</span>
+                    <span>{item.title}</span>
                   </a>
                 </SidebarMenuButton>
                 <DropdownMenu>

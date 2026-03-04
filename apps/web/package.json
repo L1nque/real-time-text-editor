@@ -12,6 +12,9 @@
 		"cf-typegen": "wrangler types"
 	},
 	"dependencies": {
+		"@blocknote/core": "^0.47.1",
+		"@blocknote/react": "^0.47.1",
+		"@blocknote/shadcn": "^0.47.1",
 		"@dicebear/collection": "^9.4.0",
 		"@dicebear/core": "^9.4.0",
 		"@fontsource-variable/figtree": "^5.2.10",
@@ -27,7 +30,8 @@
 		"react-dom": "^19.2.0",
 		"tailwind-merge": "^3.5.0",
 		"tailwindcss": "^4.2.1",
-		"unique-names-generator": "^4.7.1"
+		"unique-names-generator": "^4.7.1",
+		"uuid": "^13.0.0"
 	},
 	"devDependencies": {
 		"@cloudflare/vite-plugin": "^1.26.0",

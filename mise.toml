@@ -1,3 +1,6 @@
 [tools]
 node = "latest"
 pnpm = "latest"
+
+[env]
+_.path = ["./apps/web/node_modules/.bin"]

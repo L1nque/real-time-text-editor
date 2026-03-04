@@ -36,3 +36,5 @@ build
 .rts2_cache_*
 .nyc_output
 .coverage
+
+.wrangler
