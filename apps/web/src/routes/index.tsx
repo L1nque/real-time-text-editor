@@ -82,6 +82,7 @@ function HomeComponent() {
             <li>Click the "Create" button below to start a new document</li>
             <li>Share the URL with a friend or open it in another tab</li>
             <li>Watch the real-time cursor synchronization in action!</li>
+            <li>(optional) Disable wifi to see offline sync in action</li>
           </ul>
         </div>
         <div className="flex flex-wrap gap-4 mt-2">

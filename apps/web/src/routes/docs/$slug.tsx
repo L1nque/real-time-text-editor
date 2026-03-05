@@ -28,7 +28,25 @@ export const Route = createFileRoute('/docs/$slug')({
 })
 
 const getRandomColor = () => {
-  const colors = ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff", "#ffa500", "#800080", "#008080"];
+  const colors = [
+    "#a5b4fc",
+    "#93c5fd",
+    "#7dd3fc",
+    "#67e8f9",
+    "#5eead4",
+    "#6ee7b7",
+    "#86efac",
+    "#bef264",
+    "#fde047",
+    "#fcd34d",
+    "#fdba74",
+    "#fca5a5",
+    "#fda4af",
+    "#fbcfe8",
+    "#f5d0fe",
+    "#d8b4fe",
+    "#c4b5fd",
+  ];
   return colors[Math.floor(Math.random() * colors.length)];
 };
 
